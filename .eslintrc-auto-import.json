@@ -7,7 +7,6 @@
     "defineComponent": "readonly",
     "effectScope": "readonly",
     "EffectScope": "readonly",
-    "ElMessage": "readonly",
     "getCurrentInstance": "readonly",
     "getCurrentScope": "readonly",
     "h": "readonly",

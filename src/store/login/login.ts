@@ -30,7 +30,10 @@ const login: Module<ILoginState, IRootState> = {
     async accountLoginAction({ commit }, payload: any) {
       // 1. 登录
       const loginResult = await accountLoginRequest(payload)
-      if (!loginResult || loginResult.code !== 1000) return
+      if (!loginResult || loginResult.code !== 1000) {
+        ElMessage.error('服务器正忙, 请稍后再试')
+        return
+      }
       const user = loginResult.data
       const token = user.token
       commit('changeToken', token)
@@ -60,7 +63,10 @@ const login: Module<ILoginState, IRootState> = {
     async updateConfigAction({ commit }, payload: any) {
       const { id, config } = payload
       const res = await updateUser(id, config)
-      if (!res || res.code !== 1000) return
+      if (!res || res.code !== 1000) {
+        ElMessage.error('服务器正忙, 请稍后再试')
+        return
+      }
       ElMessage.success('提交成功')
       commit('changeConfig', config, { root: true })
       localCache.setCache('config', config)
