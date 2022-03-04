@@ -162,8 +162,8 @@ const options = [
     label: '元素禁地',
     children: [
       {
-        value: '木',
-        label: '木元素',
+        value: '风',
+        label: '风元素',
         children: _checkPoints
       },
       {
@@ -193,8 +193,8 @@ const options = [
     label: '秘境支配者',
     children: [
       {
-        value: '木',
-        label: '木装备本',
+        value: '风',
+        label: '风装备本',
         children: checkPoints
       },
       {
@@ -222,10 +222,10 @@ const options = [
 ]
 
 const mapElemental = [
-  ['木', '光'], // 周一12点后
+  ['风', '光'], // 周一12点后
   ['火', '暗'],
   ['水', '光'],
-  ['木', '暗'],
+  ['风', '暗'],
   ['火', '光'],
   ['水', '暗'] // 周六12点后, 周日全开
 ]
