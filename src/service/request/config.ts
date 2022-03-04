@@ -1,5 +1,5 @@
 const BASE_URL_DEV = '/api'
-const BASE_URL_PRO = 'http://47.96.69.41/api'
+const BASE_URL_PRO = 'http://47.96.69.41:8888'
 const BASE_URL_TEST = 'oo'
 const TIMEOUT = 1000
 const WITH_CREDENTIALS = true // 跨域携带cookie
