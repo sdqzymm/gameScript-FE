@@ -1,0 +1,28 @@
+# Ignore folders
+/dist/**
+/node_modules/**
+/public/**
+
+# Ignore file
+*.min.js
+*.map
+.local
+.output.js
+
+# Ignore images (when inadvertently opened by user)
+*.gif
+*.jpeg
+*.jpg
+*.png
+*.svg
+*.tif
+*.tiff
+
+# Ignore fonts (when inadvertently opened by user)
+*.eot
+*.svg
+*.ttf
+*.woff
+*.woff2
+
+

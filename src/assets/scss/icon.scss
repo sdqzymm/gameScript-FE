@@ -1,0 +1,49 @@
+/*
+ * 自定义字体图标使用方法:
+ * 1. 将下载的字体文件(.eot, .svg, .ttf, .woff)放在上一级fonts目录下
+ * 2. 更改font-family为你自己需要的名字
+ * 3. 替换掉src为你下载的字体文件中的src
+ * 4. 更改icon为你想要应用的类名前缀
+ * 5. 挑选相应图标并获取字体编码, 替换掉最下方示例
+ * 6. 直接在页面中使用icon-xxx为类名即可引入字体图标
+*/
+@font-face {
+  font-family: 'myFont'; // 第2步
+  src: '源地址'; // 第3步: 如果有多个src,可以再写一个
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] { // 第4步
+  font-family: 'myFont' !important;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// 第5步: 以下为示例, 请替换为你需要的图标
+.icon-ok::before {
+  content: "\e900";
+}
+
+.icon-close::before {
+  content: "\e901";
+}
+
+.icon-add::before {
+  content: "\e902";
+}
+
+// before表示字体图标应用在前面, after表示字体图标应用在后面
+// .icon-名::before {
+//   content: "字体编码"
+// }
+
+// .icon-名::after {
+//   content: "字体编码"
+// }
+

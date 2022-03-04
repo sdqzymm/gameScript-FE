@@ -1,0 +1,64 @@
+{
+  "name": "ace",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "serve": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "prettier": "prettier --write .",
+    "prepare": "husky install",
+    "commit": "cz",
+    "precommit": "lint-staged"
+  },
+  "dependencies": {
+    "@kangc/v-md-editor": "^2.3.13",
+    "axios": "^0.26.0",
+    "element-plus": "^2.0.4",
+    "lodash-es": "^4.17.21",
+    "uuid": "^8.3.2",
+    "vue": "^3.2.25",
+    "vue-router": "^4.0.0-0",
+    "vuex": "^4.0.0-0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^13.2.1",
+    "@commitlint/config-conventional": "^13.2.0",
+    "@types/lodash-es": "^4.17.6",
+    "@types/node": "^17.0.10",
+    "@types/uuid": "^8.3.4",
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "@typescript-eslint/parser": "^5.0.0",
+    "@vitejs/plugin-vue": "^2.0.0",
+    "@vue/eslint-config-prettier": "^6.0.0",
+    "@vue/eslint-config-typescript": "^7.0.0",
+    "commitizen": "^4.2.4",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^7.32.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-vue": "^7.0.0",
+    "husky": "^7.0.0",
+    "lint-staged": "^11.2.3",
+    "prettier": "^2.2.1",
+    "sass": "^1.42.1",
+    "sass-loader": "^10.2.0",
+    "typescript": "^4.4.4",
+    "unplugin-auto-import": "^0.5.11",
+    "unplugin-vue-components": "^0.17.21",
+    "vite": "^2.7.2",
+    "vite-plugin-vue-setup-extend": "^0.3.0",
+    "vue-global-api": "^0.4.1",
+    "vue-tsc": "^0.29.8"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "lint-staged": {
+    "src/**/*{.js, .ts, .vue}": [
+      "prettier --write",
+      "eslint --fix"
+    ]
+  }
+}

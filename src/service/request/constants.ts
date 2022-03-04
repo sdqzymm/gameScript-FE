@@ -1,0 +1,15 @@
+export const NETWORK_ERROR = '网络错误, 请稍后重试(0)'
+export const TIMEOUT = '请求超时, 请稍后重试(0)'
+export const ERR_400 = '请求错误(400)'
+export const ERR_401 = '未授权, 请重新登录(401)'
+export const ERR_403 = '禁止访问(403)'
+export const ERR_404 = '您所请求的资源无法找到(404)'
+export const ERR_405 = '请求方法未允许(405)'
+export const ERR_500 = '服务器内部错误(500)'
+export const ERR_501 = '服务器不支持请求的功能(501)'
+export const ERR_502 = '无效的响应(502)'
+export const ERR_503 = '服务器在忙, 请稍后重试(503)'
+export const ERR_504 = '服务器超时(504)'
+export const ERR_505 = '服务器不支持请求的HTTP协议(505)'
+export const TO_LOGIN = [401]
+export const RETRY = [0, 503, 504]
