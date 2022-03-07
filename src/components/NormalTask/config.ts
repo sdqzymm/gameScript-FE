@@ -237,7 +237,7 @@ options[1].children = options[1].children.filter((item) => {
   if (day === 0) day = 7
   if (hour < 12) day--
   if (day === 7) return true
-  if (mapElemental[day].includes(item.value)) return true
+  if (mapElemental[day - 1].includes(item.value)) return true
   return false
 })
 
