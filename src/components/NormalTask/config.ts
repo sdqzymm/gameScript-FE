@@ -232,10 +232,11 @@ const mapElemental = [
 
 options[1].children = options[1].children.filter((item) => {
   const date = new Date()
-  let day = date.getDate()
+  let day = date.getDay()
   const hour = date.getHours()
+  if (day === 0) day = 7
   if (hour < 12) day--
-  if (day === 6) return true
+  if (day === 7) return true
   if (mapElemental[day].includes(item.value)) return true
   return false
 })

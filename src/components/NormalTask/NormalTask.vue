@@ -25,7 +25,7 @@
           v-model="task.count"
           placeholder="循环次数"
           :min="1"
-          :max="10"
+          :max="5"
         />
         <el-input-number
           v-if="task.continuous"
