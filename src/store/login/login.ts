@@ -30,10 +30,10 @@ const login: Module<ILoginState, IRootState> = {
     async accountLoginAction({ commit }, payload: any) {
       // 1. 登录
       const loginResult = await accountLoginRequest(payload)
-      if (loginResult && loginResult.code !== 1000) {
-        ElMessage.error('服务器正忙, 请稍后再试')
+      if (!loginResult || loginResult.code !== 1000) {
         return
       }
+      ElMessage.success('登录成功, 3s后自动跳转')
       const user = loginResult.data
       const token = user.token
       commit('changeToken', token)
@@ -57,19 +57,22 @@ const login: Module<ILoginState, IRootState> = {
       localCache.setCache('config', config)
 
       // 3. 跳到首页
-      router.push('/')
+      setTimeout(() => {
+        router.push('/')
+      }, 3000)
     },
     // 更新配置
     async updateConfigAction({ commit }, payload: any) {
       const { id, config } = payload
       const res = await updateUser(id, config)
-      if (res && res.code !== 1000) {
-        ElMessage.error('服务器正忙, 请稍后再试')
+      if (!res) {
         return
       }
-      ElMessage.success('提交成功')
-      commit('changeConfig', config, { root: true })
-      localCache.setCache('config', config)
+      if (res.code === 1000) {
+        ElMessage.success('提交成功')
+        commit('changeConfig', config, { root: true })
+        localCache.setCache('config', config)
+      }
     },
     // 读取缓存
     loadCache({ commit }) {
