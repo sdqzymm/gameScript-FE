@@ -30,7 +30,7 @@ const login: Module<ILoginState, IRootState> = {
     async accountLoginAction({ commit }, payload: any) {
       // 1. 登录
       const loginResult = await accountLoginRequest(payload)
-      if (!loginResult || loginResult.code !== 1000) {
+      if (loginResult && loginResult.code !== 1000) {
         ElMessage.error('服务器正忙, 请稍后再试')
         return
       }
@@ -63,7 +63,7 @@ const login: Module<ILoginState, IRootState> = {
     async updateConfigAction({ commit }, payload: any) {
       const { id, config } = payload
       const res = await updateUser(id, config)
-      if (!res || res.code !== 1000) {
+      if (res && res.code !== 1000) {
         ElMessage.error('服务器正忙, 请稍后再试')
         return
       }
