@@ -53,9 +53,11 @@ const defaultResponseInterceptors: Interceptors<AxiosResponse<any>> = {
       }).then(() => {
         router.push('/login')
       })
-    } else if (constants.RETRY.includes(errStatus)) {
-      // todo: 尝试重新请求(若配置)
-    } else {
+    }
+    // else if (constants.RETRY.includes(errStatus)) {
+    //   // todo: 尝试重新请求(若配置)
+    // }
+    else {
       return createErrMessage(message)
     }
   }
@@ -110,25 +112,33 @@ function createErrMessage(message: string) {
 }
 
 let loadingInstance: any
+let reqCount = 0
 
 const loadingRequestInterceptors: Interceptors = {
   resolved(config) {
-    loadingInstance = ElLoading.service({
-      lock: true,
-      text: 'loading',
-      background: 'rgba(0, 0, 0, 0.5)'
-    })
+    reqCount++
+    setTimeout(() => {
+      if (reqCount != 0) {
+        loadingInstance = ElLoading.service({
+          lock: true,
+          text: 'loading',
+          background: 'rgba(0, 0, 0, 0.5)'
+        })
+      }
+    }, 200)
     return config
   }
 }
 
 const loadingResponseInterceptors: Interceptors<AxiosResponse<any>> = {
   resolved(val) {
-    loadingInstance.close()
+    reqCount--
+    if (reqCount === 0 && loadingInstance) loadingInstance.close()
     return val
   },
   rejected(err) {
-    loadingInstance.close()
+    reqCount--
+    if (reqCount === 0 && loadingInstance) loadingInstance.close()
     return err
   }
 }

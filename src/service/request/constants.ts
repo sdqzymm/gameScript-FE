@@ -1,4 +1,4 @@
-export const NETWORK_ERROR = '网络错误, 请稍后重试(0)'
+export const NETWORK_ERROR = '网络错误, 请稍后重试'
 export const TIMEOUT = '请求超时, 请稍后重试(0)'
 export const ERR_400 = '请求错误(400)'
 export const ERR_401 = '未授权, 请重新登录(401)'
