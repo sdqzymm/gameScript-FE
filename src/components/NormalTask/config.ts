@@ -218,6 +218,48 @@ const options = [
         children: checkPoints
       }
     ]
+  },
+  {
+    value: '活动',
+    label: '烈焰之拳',
+    children: [
+      {
+        value: '1',
+        label: 'Ⅰ(1-3)'
+      },
+      {
+        value: '2',
+        label: 'Ⅱ(2-3)'
+      },
+      {
+        value: '3',
+        label: 'Ⅲ(3-3)'
+      },
+      {
+        value: '4',
+        label: 'Ⅳ(4-3)'
+      },
+      {
+        value: '5',
+        label: 'Ⅴ(5-3)'
+      },
+      {
+        value: '6',
+        label: 'Ⅵ(6-3)'
+      },
+      {
+        value: '7',
+        label: 'Ⅶ(7-3)'
+      },
+      {
+        value: '8',
+        label: 'Ⅷ(8-3)'
+      },
+      {
+        value: '9',
+        label: 'Ⅸ(9-3)'
+      }
+    ]
   }
 ]
 
