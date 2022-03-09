@@ -11,8 +11,8 @@ const routes: Array<RouteRecordRaw> = [
     redirect: '/detail/1'
   },
   {
-    path: '/login',
     name: 'login',
+    path: '/login',
     component: () =>
       import('@/views/LoginView/Login.vue' /* webpackChunkName: "login" */)
   },
@@ -20,6 +20,11 @@ const routes: Array<RouteRecordRaw> = [
     name: 'detail',
     path: '/detail/:id',
     component: Detail
+  },
+  {
+    name: 'reward',
+    path: '/reward',
+    component: () => import('@/views/RewardView.vue')
   },
   {
     path: '/:pathMatch(.*)*',

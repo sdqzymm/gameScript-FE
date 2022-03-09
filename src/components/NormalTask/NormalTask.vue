@@ -16,8 +16,8 @@
       >
         <el-cascader
           v-model="task.strs"
+          style="width: 250px"
           :options="options"
-          :props="hover"
           @change="handleChange($event, index)"
           placeholder="请选择任务类型"
         ></el-cascader>
@@ -59,7 +59,7 @@
 </template>
 
 <script setup lang="ts">
-import { ExpandTrigger } from 'element-plus/es/components/cascader-panel/src/node'
+// import { ExpandTrigger } from 'element-plus/es/components/cascader-panel/src/node'
 import useConfig from '../../hooks/useConfig'
 import { pick } from 'lodash-es'
 import type { ElForm } from 'element-plus'
@@ -75,9 +75,9 @@ const config = useConfig()
 const store = useStore()
 
 // 控制鼠标悬浮弹出选项
-const hover = {
-  expandTrigger: ExpandTrigger.HOVER
-}
+// const hover = {
+//   expandTrigger: ExpandTrigger.HOVER
+// }
 
 // 处理任务类型变化
 const handleChange = (strs: string[], index: number) => {

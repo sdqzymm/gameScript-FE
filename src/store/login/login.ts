@@ -19,9 +19,11 @@ const login: Module<ILoginState, IRootState> = {
   mutations: {
     changeToken(state, token: string) {
       state.token = token
+      localCache.setCache('token', token)
     },
     changeUserInfo(state, userInfo: UserInfo) {
       state.userInfo = userInfo
+      localCache.setCache('userInfo', userInfo)
     }
   },
   getters: {},
@@ -33,11 +35,13 @@ const login: Module<ILoginState, IRootState> = {
       if (!loginResult || loginResult.code !== 1000) {
         return
       }
-      ElMessage.success('登录成功, 3s后自动跳转')
+      ElMessage.success({
+        duration: 2000,
+        message: '登录成功, 2s后自动跳转'
+      })
       const user = loginResult.data
       const token = user.token
       commit('changeToken', token)
-      localCache.setCache('token', token)
 
       // 2. 用户信息
       const userInfo = {
@@ -45,7 +49,6 @@ const login: Module<ILoginState, IRootState> = {
         name: user.name
       }
       commit('changeUserInfo', userInfo)
-      localCache.setCache('userInfo', userInfo)
 
       // 3. 保存config
       const config = {
@@ -54,12 +57,11 @@ const login: Module<ILoginState, IRootState> = {
         shopping: user.shopping || ''
       }
       commit('changeConfig', config, { root: true })
-      localCache.setCache('config', config)
 
       // 3. 跳到首页
       setTimeout(() => {
         router.push('/')
-      }, 3000)
+      }, 2000)
     },
     // 更新配置
     async updateConfigAction({ commit }, payload: any) {
@@ -75,7 +77,7 @@ const login: Module<ILoginState, IRootState> = {
       }
     },
     // 读取缓存
-    loadCache({ commit }) {
+    loadCacheAction({ commit }) {
       const token = localCache.getCache('token')
       if (token) {
         commit('changeToken', token)
@@ -90,6 +92,18 @@ const login: Module<ILoginState, IRootState> = {
       if (config) {
         commit('changeConfig', config, { root: true })
       }
+    },
+    // 登出
+    logoutAction({ commit }) {
+      commit('changeToken', '')
+      commit('changeUserInfo', {})
+      ElMessage({
+        duration: 500,
+        message: '登出, 即将前往登录页面'
+      })
+      setTimeout(() => {
+        router.push('/login')
+      }, 500)
     }
   }
 }

@@ -13,21 +13,25 @@
         prop="schedules"
         :label="task.type"
       >
+        间隔
         <el-input-number
-          style="width: 170px"
+          class="number"
+          style="width: 120px"
           v-model="task.interval"
           placeholder="间隔几小时"
           :min="3"
           :max="5"
         />
-        &nbsp;&nbsp;
+        小时
         <el-switch
+          class="switch"
           v-model="task.before"
           inline-prompt
           active-text="是"
           inactive-text="否"
         >
         </el-switch>
+        优先于配置任务
         <div>{{ msg(task) }}</div>
       </el-form-item>
     </el-form>
@@ -54,9 +58,17 @@ const msg = computed(() => (task: Task) => {
 <style lang="scss" scoped>
 .schedule-task {
   .task {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     padding: 20px;
+    padding-bottom: 10px;
     border: 1px solid black;
+    .number {
+      margin: 0 5px;
+    }
+    .switch {
+      margin-left: 50px;
+      margin-right: 5px;
+    }
   }
 }
 </style>

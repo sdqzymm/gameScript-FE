@@ -1,4 +1,5 @@
 <template>
+  <user-profile></user-profile>
   <div class="detail">
     <h2 class="title">ace脚本</h2>
     <div class="collapse">
@@ -46,6 +47,7 @@
 <script setup lang="ts">
 import useConfig from '../../hooks/useConfig'
 import { getDefaultTask } from '../../store/config'
+import UserProfile from '@/components/UserProfile/UserProfile.vue'
 
 // 控制当前展开面板
 const activeNames = ref<string[]>([])
@@ -64,16 +66,15 @@ const needKnows = [
     id: 2,
     title: '系统',
     msgs: [
-      '系统分辨率1920*1080',
-      '系统控制面板电源选项请设置永远不关闭显示(显示器是可以关闭的), 永远不休眠, 防止脚本无法图色',
-      '命令行窗口: 默认值->选项->取消勾选快速编辑模式, 避免误触命令行导致脚本暂停'
+      '系统控制面板电源选项请设置永远不关闭显示(显示器是可以关闭的), 永远不休眠',
+      '命令行窗口: 上方菜单栏右键->默认值->选项->取消勾选快速编辑模式(窗口键+r输入cmd可以打开命令行)'
     ]
   },
   {
     id: 3,
-    title: '模拟',
+    title: '模拟器',
     msgs: [
-      '版本: 脚本是在夜神安卓9版本上开发, 建议使用该版本',
+      '版本: 脚本是在夜神安卓9版本上开发, 建议使用该版本, 夜神7应该也可以',
       '分辨率: 平板版-960*540'
     ]
   },
@@ -89,7 +90,11 @@ const needKnows = [
   {
     id: 5,
     title: '脚本',
-    msgs: ['在挂机过程中请不要操作游戏', '最好在主页启动脚本']
+    msgs: [
+      '模拟器窗口不能最小化',
+      '在挂机过程中请不要操作游戏, 不要移动模拟器',
+      '如果绑定失败请将模拟器窗口置顶再启动脚本'
+    ]
   }
 ]
 
@@ -112,8 +117,8 @@ const submit = () => {
 
 <style lang="scss" scoped>
 .detail {
-  min-width: 700px;
-  width: 700px;
+  min-width: 750px;
+  width: 750px;
   margin: 30px auto;
   .title {
     font-size: 24px;
