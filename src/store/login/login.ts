@@ -104,7 +104,7 @@ const login: Module<ILoginState, IRootState> = {
       }, 500)
     },
     // 绑定注册码
-    async bindCodeAction({ commit }, payload: any) {
+    async bindCodeAction(_, payload: any) {
       const res = await bindCode(payload.code, payload.userId)
       if (!res || res.code != 1000) {
         return
