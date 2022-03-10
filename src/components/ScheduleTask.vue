@@ -20,7 +20,7 @@
           v-model="task.interval"
           placeholder="间隔几小时"
           :min="3"
-          :max="5"
+          :max="task.type === '竞技场' ? 10 : 5"
         />
         小时
         <el-switch
@@ -50,7 +50,7 @@ const msg = computed(() => (task: Task) => {
   const { type, interval, before } = task
   const msg = `表示脚本开始时${
     before ? '会' : '不会'
-  }优先执行${type}任务, 然后间隔${interval}小时执行${type}任务`
+  }优先执行${type}任务, 每隔${interval}小时执行${type}任务`
   return msg
 })
 </script>

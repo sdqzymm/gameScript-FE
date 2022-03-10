@@ -24,7 +24,6 @@ const store = createStore<IRootState>({
       localCache.setCache('config', config)
     }
   },
-  actions: {},
   modules: {
     login
   }

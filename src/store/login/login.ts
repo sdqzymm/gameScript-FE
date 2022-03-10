@@ -1,6 +1,6 @@
 import { Module } from 'vuex'
 import router from '@/router'
-import { accountLoginRequest, updateUser } from '@/service'
+import { accountLoginRequest, updateUser, bindCode } from '@/service'
 import localCache from '@/utils/cache'
 import { ElMessage } from 'element-plus'
 import type { IRootState } from '../type'
@@ -67,14 +67,12 @@ const login: Module<ILoginState, IRootState> = {
     async updateConfigAction({ commit }, payload: any) {
       const { id, config } = payload
       const res = await updateUser(id, config)
-      if (!res) {
+      if (!res || res.code != 1000) {
         return
       }
-      if (res.code === 1000) {
-        ElMessage.success('提交成功')
-        commit('changeConfig', config, { root: true })
-        localCache.setCache('config', config)
-      }
+      ElMessage.success('提交成功')
+      commit('changeConfig', config, { root: true })
+      localCache.setCache('config', config)
     },
     // 读取缓存
     loadCacheAction({ commit }) {
@@ -104,6 +102,17 @@ const login: Module<ILoginState, IRootState> = {
       setTimeout(() => {
         router.push('/login')
       }, 500)
+    },
+    // 绑定注册码
+    async bindCodeAction({ commit }, payload: any) {
+      const res = await bindCode(payload.code, payload.userId)
+      if (!res || res.code != 1000) {
+        return
+      }
+      ElMessage.success({
+        duration: 1500,
+        message: '绑定成功'
+      })
     }
   }
 }

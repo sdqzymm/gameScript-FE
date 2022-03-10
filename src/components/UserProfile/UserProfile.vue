@@ -9,7 +9,7 @@
       </span>
       <template #dropdown>
         <el-dropdown-menu>
-          <el-dropdown-item command="reward">打赏</el-dropdown-item>
+          <el-dropdown-item command="bind">绑定</el-dropdown-item>
           <el-dropdown-item divided command="logout">登出</el-dropdown-item>
         </el-dropdown-menu>
       </template>
@@ -30,8 +30,8 @@ const router = useRouter()
 
 const handleCommand = (command: string | number | object) => {
   switch (command) {
-    case 'reward':
-      router.push('/reward')
+    case 'bind':
+      router.push('/bind')
       break
     case 'logout':
       store.dispatch('login/logoutAction')

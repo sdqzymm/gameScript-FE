@@ -25,7 +25,7 @@
           v-model="task.count"
           placeholder="循环次数"
           :min="1"
-          :max="5"
+          :max="task.type === '活动' ? 10 : 5"
         />
         <el-input-number
           v-if="task.continuous"
@@ -86,6 +86,9 @@ const handleChange = (strs: string[], index: number) => {
     floor = floor + '-' + strs[3]
   }
   const task = config.value.tasks[index]
+  if (type !== '活动' && task.count && task.count > 5) {
+    task.count = 5
+  }
   task.type = type
   task.property = property
   task.floor = floor

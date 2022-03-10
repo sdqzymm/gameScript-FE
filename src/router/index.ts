@@ -22,9 +22,9 @@ const routes: Array<RouteRecordRaw> = [
     component: Detail
   },
   {
-    name: 'reward',
-    path: '/reward',
-    component: () => import('@/views/RewardView.vue')
+    name: 'bind',
+    path: '/bind',
+    component: () => import('@/views/BindCode.vue')
   },
   {
     path: '/:pathMatch(.*)*',

@@ -39,7 +39,7 @@ const defaultResponseInterceptors: Interceptors<AxiosResponse<any>> = {
       }
     } else {
       // 处理4xx, 5xx状态码(3xx重定向浏览器自动处理)
-      message = processMessage(err.response!.status)
+      message = processMessage(err.response!.status, err.response)
       if (!message) message = err.message
     }
 
@@ -63,7 +63,7 @@ const defaultResponseInterceptors: Interceptors<AxiosResponse<any>> = {
   }
 }
 
-function processMessage(status: number): string {
+function processMessage(status: number, response: any): string {
   let message: string
   switch (status) {
     case 400:
@@ -103,7 +103,7 @@ function processMessage(status: number): string {
       message = ''
       break
   }
-  return message
+  return response.data ?? message
 }
 
 function createErrMessage(message: string) {
