@@ -36,7 +36,7 @@
           </template>
           <normal-task ref="taskRef"></normal-task>
           <div class="mid">
-            <el-button @click="addTask">添加任务</el-button>
+            <el-button v-show="show" @click="addTask">添加任务</el-button>
           </div>
         </el-collapse-item>
       </el-collapse>
@@ -61,8 +61,7 @@ const needKnows = [
     id: 0,
     title: '说明',
     msgs: [
-      '脚本支持自动更新',
-      '脚本支持断线重连, 支持顶号半小时后重连, 支持游戏闪退重启',
+      '脚本支持自动更新, 支持断线重连, 支持顶号半小时后重连, 支持游戏闪退重启',
       '脚本目前支持商店购物, 竞技场, 冒险, 元素禁地, 秘境支配者, 活动图',
       '请认真阅读使用需知, 以免脚本使用过程中出错'
     ]
@@ -73,7 +72,7 @@ const needKnows = [
     msgs: [
       '请加群249946487(暗号: ace), 群文件下载脚本, 直接解压即可',
       '执行脚本目录下的dm.bat, 提示注册成功',
-      '淘宝购买获取注册码(请保存, 以免丢失)',
+      '淘宝(这里待上链接)购买获取注册码(请保存, 以免丢失)',
       '执行脚本目录下的reg.bat, 输入注册码, 确认无误',
       '点击右上角用户名处的绑定, 输入注册码, 点击提交',
       '注意: 请不要删除或移动脚本目录下的文件'
@@ -132,6 +131,11 @@ const config = useConfig()
 const addTask = () => {
   config.value.tasks.push(getDefaultTask())
 }
+
+// 控制添加任务按钮显示
+const show = computed(() => {
+  return config.value.tasks.length < 20
+})
 
 // 触发配置任务表单的提交(因为定时任务表单无需校验)
 const taskRef = ref()

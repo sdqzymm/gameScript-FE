@@ -17,6 +17,14 @@ const routes: Array<RouteRecordRaw> = [
       import('@/views/LoginView/Login.vue' /* webpackChunkName: "login" */)
   },
   {
+    name: 'register',
+    path: '/register',
+    component: () =>
+      import(
+        '@/views/RegisterView/RegisterView.vue' /*webpackChunkName: "register" */
+      )
+  },
+  {
     name: 'detail',
     path: '/detail/:id',
     component: Detail
@@ -39,7 +47,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to) => {
-  if (to.path !== '/login') {
+  if (to.path !== '/login' && to.path !== '/register') {
     const token = localCache.getCache('token')
     if (!token) return '/login'
   }

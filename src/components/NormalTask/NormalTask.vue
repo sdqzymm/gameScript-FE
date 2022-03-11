@@ -38,7 +38,6 @@
         <el-button
           style="margin-left: 20px"
           type="danger"
-          v-if="config.tasks.length > 1"
           @click="handleDelete(index)"
           >删除</el-button
         >
@@ -159,7 +158,6 @@ const submit = () => {
         config
       })
     } else {
-      ElMessage.error('提交失败, 请重新填写')
       return false
     }
   })

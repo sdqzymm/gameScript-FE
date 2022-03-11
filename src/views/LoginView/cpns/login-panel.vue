@@ -1,7 +1,12 @@
 <template>
   <div class="login-panel">
     <!-- <h1 class="title">脚本登录</h1> -->
-    <el-tabs type="border-card" stretch v-model="currentTab">
+    <el-tabs
+      type="border-card"
+      stretch
+      v-model="currentTab"
+      @tab-click="handleTabClick"
+    >
       <el-tab-pane name="account">
         <template #label>
           <span><i class="el-icon-user-solid"></i> 账号登录</span>
@@ -17,11 +22,11 @@
     </el-tabs>
     <div class="control">
       <el-checkbox v-model="isKeep">记住{{ message }}</el-checkbox>
-      <el-link type="primary" :underline="false">忘记{{ message }}</el-link>
     </div>
-    <el-button type="primary" class="login-btn" @click="handleLoginClick"
-      >立即登录</el-button
-    >
+    <div class="btn">
+      <el-button type="success" @click="handleRegClick">前往注册</el-button>
+      <el-button type="primary" @click="handleLoginClick">立即登录</el-button>
+    </div>
   </div>
 </template>
 
@@ -29,6 +34,8 @@
 import { ref, computed } from 'vue'
 import LoginAccount from './login-account.vue'
 import LoginMobile from './login-mobile.vue'
+import { useRouter } from 'vue-router'
+import { ElMessage } from 'element-plus'
 
 // 定义属性
 const isKeep = ref(true)
@@ -41,6 +48,17 @@ const message = computed(() =>
   currentTab.value === 'account' ? '密码' : '手机号'
 )
 
+// 暂时关闭手机登录
+const handleTabClick = (tab: any) => {
+  const name = tab.paneName
+  if (name === 'mobile') {
+    ElMessage.warning({
+      duration: 1500,
+      message: '暂不支持手机登录'
+    })
+  }
+}
+
 // 点击登录
 const handleLoginClick = () => {
   if (currentTab.value === 'account') {
@@ -48,6 +66,12 @@ const handleLoginClick = () => {
   } else if (currentTab.value === 'mobile') {
     mobileRef.value?.loginAction(isKeep.value)
   }
+}
+
+// 点击注册
+const router = useRouter()
+const handleRegClick = () => {
+  router.push('/register')
 }
 </script>
 
@@ -72,8 +96,10 @@ h1 {
     margin-top: 10px;
     justify-content: space-between;
   }
-  .login-btn {
-    width: 100%;
+  .btn {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
   }
 }
 </style>

@@ -1,6 +1,6 @@
 import { Module } from 'vuex'
 import router from '@/router'
-import { accountLoginRequest, updateUser, bindCode } from '@/service'
+import { accountLoginRequest, updateUser, bindCode, register } from '@/service'
 import localCache from '@/utils/cache'
 import { ElMessage } from 'element-plus'
 import type { IRootState } from '../type'
@@ -36,8 +36,8 @@ const login: Module<ILoginState, IRootState> = {
         return
       }
       ElMessage.success({
-        duration: 2000,
-        message: '登录成功, 2s后自动跳转'
+        duration: 1000,
+        message: '登录成功, 1s后自动跳转'
       })
       const user = loginResult.data
       const token = user.token
@@ -113,6 +113,20 @@ const login: Module<ILoginState, IRootState> = {
         duration: 1500,
         message: '绑定成功'
       })
+    },
+    // 账号注册
+    async accountRegisterAction(_, payload: any) {
+      const res = await register(payload)
+      if (!res || res.code != 1000) {
+        return
+      }
+      ElMessage.success({
+        duration: 1000,
+        message: '注册成功, 正在自动登录'
+      })
+      setTimeout(() => {
+        this.dispatch('login/accountLoginAction', payload)
+      }, 1000)
     }
   }
 }

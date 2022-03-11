@@ -19,7 +19,7 @@ export default {
       },
       {
         pattern: /^[a-zA-Z0-9]{6,}$/,
-        message: '用户名必须是6位以上的字母或数字'
+        message: '密码必须是6位以上的字母或数字'
       }
     ]
   }

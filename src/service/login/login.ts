@@ -4,6 +4,7 @@ import { Account, AccountLoginData } from './type'
 
 enum LoginAPI {
   AccountLogin = '/login',
+  AccountRegister = '/user',
   UserInfo = '/user/',
   BindCode = 'code/bind'
 }
@@ -24,4 +25,8 @@ export function bindCode(code: string, id: number) {
     code,
     id
   })
+}
+
+export function register(account: any) {
+  return hyfRequest.post<APIData>(LoginAPI.AccountRegister, account)
 }
