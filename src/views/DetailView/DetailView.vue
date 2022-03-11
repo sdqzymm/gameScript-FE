@@ -1,7 +1,7 @@
 <template>
   <user-profile></user-profile>
   <div class="detail">
-    <h2 class="head">ace脚本</h2>
+    <h2 class="head">ace模拟器脚本</h2>
     <div class="collapse">
       <el-collapse v-model="activeNames" accordion>
         <el-collapse-item name="1">
