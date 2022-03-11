@@ -62,7 +62,6 @@
 import useConfig from '../../hooks/useConfig'
 import { pick } from 'lodash-es'
 import type { ElForm } from 'element-plus'
-import { ElMessage } from 'element-plus'
 import { FormItemRule } from 'element-plus/es/components/form/src/form.type'
 import { useStore } from '@/store'
 import options from './config'
