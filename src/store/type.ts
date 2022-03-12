@@ -24,6 +24,7 @@ export interface Config {
   tasks: Task[]
   schedules: Task[]
   shopping?: string
+  continuous: boolean
 }
 
 export interface IRootState {

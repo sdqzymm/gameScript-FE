@@ -77,10 +77,6 @@ const handleReset = (formEl: FormInstance | undefined) => {
     margin: 250px auto;
     width: 30%;
     min-width: 350px;
-    ::v-deep .el-form-item__content {
-      display: flex;
-      justify-content: center;
-    }
   }
 }
 </style>

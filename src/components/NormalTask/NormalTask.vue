@@ -53,6 +53,18 @@
           >
         </el-checkbox-group>
       </el-form-item>
+      <el-form-item class="continuous">
+        <el-switch
+          v-model="config.continuous"
+          class="mb-2"
+          active-text="装备本开启连续战斗"
+          inactive-text="装备本开启单次战斗"
+        >
+        </el-switch>
+        <div v-if="!config.continuous" class="text">
+          此时, 装备本单次战斗总次数自动设置为循环次数与连续次数相乘
+        </div>
+      </el-form-item>
     </el-form>
   </div>
 </template>
@@ -174,6 +186,13 @@ defineExpose({
     margin-bottom: 30px;
     padding: 20px 20px 0 20px;
     border: 1px solid black;
+  }
+  .continuous ::v-deep .el-form-item__content {
+    flex-direction: column;
+    justify-content: center;
+    .text {
+      color: red;
+    }
   }
 }
 </style>
