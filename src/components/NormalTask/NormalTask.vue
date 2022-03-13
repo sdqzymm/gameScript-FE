@@ -52,17 +52,20 @@
             >{{ mapContinuous[key] }}</el-checkbox
           >
         </el-checkbox-group>
+        <template v-if="task.type === '元素禁地' || task.type === '秘境支配者'">
+          <el-switch
+            v-model="task.continuous!.open"
+            class="mb-2"
+            active-text="连续战斗"
+            inactive-text="单次战斗"
+          ></el-switch>
+        </template>
       </el-form-item>
       <el-form-item class="continuous">
-        <el-switch
-          v-model="config.continuous"
-          class="mb-2"
-          active-text="装备本开启连续战斗"
-          inactive-text="装备本开启单次战斗"
-        >
-        </el-switch>
-        <div v-if="!config.continuous" class="text">
-          此时, 装备本单次战斗总次数自动设置为循环次数与连续次数相乘
+        <div class="text">
+          当开启单次战斗时, 继承用票/用钻的设定,
+          战斗总次数自动设置为循环次数与连续次数相乘,
+          同时不会因为失败或者发现地下城停止
         </div>
       </el-form-item>
     </el-form>
@@ -70,7 +73,6 @@
 </template>
 
 <script setup lang="ts">
-// import { ExpandTrigger } from 'element-plus/es/components/cascader-panel/src/node'
 import useConfig from '../../hooks/useConfig'
 import { pick } from 'lodash-es'
 import type { ElForm } from 'element-plus'
@@ -83,11 +85,6 @@ const config = useConfig()
 
 // 获取store
 const store = useStore()
-
-// 控制鼠标悬浮弹出选项
-// const hover = {
-//   expandTrigger: ExpandTrigger.HOVER
-// }
 
 // 处理任务类型变化
 const handleChange = (strs: string[], index: number) => {
@@ -184,10 +181,17 @@ defineExpose({
 .normal-task {
   .task {
     margin-bottom: 30px;
-    padding: 20px 20px 0 20px;
+    padding: 20px 10px 0 10px;
     border: 1px solid black;
   }
-  .continuous ::v-deep .el-form-item__content {
+  :deep(.el-checkbox-group) {
+    height: 32px;
+    margin-right: 20px;
+  }
+  :deep(.el-switch__label.is-active) {
+    color: red;
+  }
+  .continuous :deep(.el-form-item__content) {
     flex-direction: column;
     justify-content: center;
     .text {

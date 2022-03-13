@@ -6,6 +6,7 @@ export interface Continuous {
   diamond: boolean
   fail: boolean
   find: boolean
+  open: boolean
 }
 export interface Task {
   id: string
@@ -24,7 +25,6 @@ export interface Config {
   tasks: Task[]
   schedules: Task[]
   shopping?: string
-  continuous: boolean
 }
 
 export interface IRootState {
