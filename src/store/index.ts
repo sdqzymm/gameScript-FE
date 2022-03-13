@@ -14,8 +14,7 @@ const store = createStore<IRootState>({
       config: {
         tasks: [getDefaultTask()],
         schedules: getDefaultSchedule(),
-        shopping: '',
-        continuous: true
+        shopping: ''
       }
     }
   },
