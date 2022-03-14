@@ -28,10 +28,12 @@ const defaultResponseInterceptors: Interceptors<AxiosResponse<any>> = {
   },
   rejected(err: AxiosError<any>) {
     let message: string
+    let errStatus = 400
 
     if (err.request.status === 0) {
       // 处理请求超时或者网络错误
       message = err.message.toLowerCase()
+      errStatus = 0
       if (message.includes('network error')) {
         message = constants.NETWORK_ERROR
       } else if (message.includes('timeout')) {
@@ -39,11 +41,11 @@ const defaultResponseInterceptors: Interceptors<AxiosResponse<any>> = {
       }
     } else {
       // 处理4xx, 5xx状态码(3xx重定向浏览器自动处理)
-      message = processMessage(err.response!.status, err.response)
+      const res = processMessage(err.response!.status, err.response)
+      message = res.message
+      errStatus = res.code
       if (!message) message = err.message
     }
-
-    const errStatus: number = +(message.match(/\((.*)\)/)?.[1] ?? -1)
 
     if (constants.TO_LOGIN.includes(errStatus)) {
       ElMessageBox.confirm(message, '提醒', {
@@ -63,7 +65,7 @@ const defaultResponseInterceptors: Interceptors<AxiosResponse<any>> = {
   }
 }
 
-function processMessage(status: number, response: any): string {
+function processMessage(status: number, response: any): any {
   let message: string
   switch (status) {
     case 400:
@@ -103,7 +105,10 @@ function processMessage(status: number, response: any): string {
       message = ''
       break
   }
-  return response.data ?? message
+  return {
+    message: response.data ?? message,
+    code: status
+  }
 }
 
 function createErrMessage(message: string) {

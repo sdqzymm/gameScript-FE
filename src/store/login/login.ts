@@ -71,8 +71,10 @@ const login: Module<ILoginState, IRootState> = {
         return
       }
       ElMessage.success('提交成功')
+      // 更新配置, 并且更新下token
       commit('changeConfig', config, { root: true })
-      localCache.setCache('config', config)
+      const token = res.data.token
+      token && commit('changeToken', token)
     },
     // 读取缓存
     loadCacheAction({ commit }) {
