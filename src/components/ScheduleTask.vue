@@ -3,7 +3,7 @@
     <el-form
       ref="formRef"
       :model="config"
-      label-width="60px"
+      label-width="100px"
       label-position="left"
     >
       <el-form-item
@@ -33,6 +33,18 @@
         </el-switch>
         优先于配置任务
         <div>{{ msg(task) }}</div>
+      </el-form-item>
+      <el-form-item label="模拟器" class="task">
+        <el-switch
+          v-model="config.hidden"
+          class="mb-2"
+          active-text="隐藏模拟器"
+          inactive-text="显示模拟器"
+        />
+        <div v-if="config.hidden" class="text">
+          模拟器会被隐藏, 切记退出脚本时使用ctrl+c, 不要直接右上角关闭,
+          否则脚本不会帮你恢复显示模拟器
+        </div>
       </el-form-item>
     </el-form>
   </div>
@@ -68,6 +80,9 @@ const msg = computed(() => (task: Task) => {
     .switch {
       margin-left: 50px;
       margin-right: 5px;
+    }
+    .text {
+      color: red;
     }
   }
 }

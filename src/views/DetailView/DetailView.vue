@@ -26,7 +26,7 @@
         </el-collapse-item>
         <el-collapse-item name="2">
           <template #title>
-            <div><span class="title">定时任务</span>(一般无需配置)</div>
+            <div><span class="title">全局配置</span></div>
           </template>
           <schedule-task></schedule-task>
         </el-collapse-item>
@@ -82,8 +82,9 @@ const needKnows = [
     id: 2,
     title: '使用方法',
     msgs: [
-      '只需在网站配置任务后点提交显示提交成功',
-      '然后在游戏任意界面, 双击脚本目录下的ace.exe启动脚本'
+      '配置任务: 网站配置任务后点提交显示提交成功',
+      '启动脚本: 在游戏任意界面, 双击脚本目录下的ace.exe启动脚本',
+      '停止脚本: 在脚本命令行窗口按住ctrl+c退出脚本'
     ]
   },
   {
@@ -115,7 +116,7 @@ const needKnows = [
     id: 6,
     title: '使用注意',
     msgs: [
-      '模拟器窗口不能最小化',
+      '模拟器窗口不能最小化, 有需求请开启脚本的隐藏模拟器功能',
       '在挂机过程中请不要操作游戏, 不要移动模拟器',
       '如果绑定失败请将模拟器窗口置于最上方再尝试',
       '注册码将与电脑绑定, 不能在多台电脑使用',
