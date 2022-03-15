@@ -14,12 +14,14 @@ const store = createStore<IRootState>({
       config: {
         tasks: [getDefaultTask()],
         schedules: getDefaultSchedule(),
-        shopping: ''
+        shopping: '',
+        hidden: false
       }
     }
   },
   mutations: {
     changeConfig(state, config: Config) {
+      config.hidden = config.hidden ?? false
       state.config = config
       localCache.setCache('config', config)
     }

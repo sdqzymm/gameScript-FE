@@ -10,6 +10,7 @@ export interface AccountLoginData {
   tasks: string
   schedules: string
   shopping: string
+  hidden: boolean
 }
 
 // 这些数据接口如果有空以后再写(业务代码中已经导入使用)

@@ -54,7 +54,8 @@ const login: Module<ILoginState, IRootState> = {
       const config = {
         tasks: JSON.parse(user.tasks) || [getDefaultTask()],
         schedules: JSON.parse(user.schedules) || getDefaultSchedule(),
-        shopping: user.shopping || ''
+        shopping: user.shopping || '',
+        hidden: user.hidden
       }
       commit('changeConfig', config, { root: true })
 
@@ -97,6 +98,7 @@ const login: Module<ILoginState, IRootState> = {
     logoutAction({ commit }) {
       commit('changeToken', '')
       commit('changeUserInfo', {})
+      commit('changeConfig', {}, { root: true })
       ElMessage({
         duration: 500,
         message: '登出, 即将前往登录页面'
