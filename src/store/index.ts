@@ -21,7 +21,6 @@ const store = createStore<IRootState>({
   },
   mutations: {
     changeConfig(state, config: Config) {
-      config.hidden = config.hidden ?? false
       state.config = config
       localCache.setCache('config', config)
     }

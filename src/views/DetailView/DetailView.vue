@@ -136,6 +136,7 @@ const addTask = () => {
 
 // 控制添加任务按钮显示
 const show = computed(() => {
+  if (!config.value.tasks) return true
   return config.value.tasks.length < 20
 })
 

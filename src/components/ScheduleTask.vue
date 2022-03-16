@@ -34,7 +34,7 @@
         优先于配置任务
         <div>{{ msg(task) }}</div>
       </el-form-item>
-      <el-form-item label="模拟器" class="task">
+      <el-form-item label="模拟器" class="task disable">
         <el-switch
           v-model="config.hidden"
           class="mb-2"
@@ -69,6 +69,9 @@ const msg = computed(() => (task: Task) => {
 
 <style lang="scss" scoped>
 .schedule-task {
+  .disable {
+    display: none;
+  }
   .task {
     margin-bottom: 20px;
     padding: 20px;

@@ -21,14 +21,14 @@ export function getDefaultTask(): Task {
 export function getDefaultSchedule() {
   return [
     {
-      id: 'shopping',
-      type: '商店',
+      id: 'arena',
+      type: '竞技场',
       before: true,
       interval: 3
     },
     {
-      id: 'arena',
-      type: '竞技场',
+      id: 'shopping',
+      type: '商店',
       before: true,
       interval: 3
     }
