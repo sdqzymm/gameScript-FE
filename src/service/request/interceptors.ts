@@ -29,8 +29,7 @@ const defaultResponseInterceptors: Interceptors<AxiosResponse<any>> = {
   rejected(err: AxiosError<any>) {
     let message: string
     let errStatus = 400
-
-    if (err.request.status === 0) {
+    if (err.request && err.request.status === 0) {
       // 处理请求超时或者网络错误
       message = err.message.toLowerCase()
       errStatus = 0

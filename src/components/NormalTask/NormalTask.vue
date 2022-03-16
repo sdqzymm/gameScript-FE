@@ -160,10 +160,9 @@ const submit = () => {
   if (!formRef.value) return
   formRef.value.validate((valid) => {
     if (valid) {
-      const config = store.state.config
       store.dispatch('login/updateConfigAction', {
         id: store.state.login.userInfo.id,
-        config
+        config: toRaw(config.value)
       })
     } else {
       return false

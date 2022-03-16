@@ -67,6 +67,7 @@ const login: Module<ILoginState, IRootState> = {
     // 更新配置
     async updateConfigAction({ commit }, payload: any) {
       const { id, config } = payload
+      console.log(config)
       const res = await updateUser(id, config)
       if (!res || res.code != 1000) {
         return
