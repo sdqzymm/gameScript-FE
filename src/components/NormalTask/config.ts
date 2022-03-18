@@ -273,11 +273,13 @@ const mapElemental = [
 ]
 
 options[1].children = options[1].children.filter((item) => {
-  const date = new Date()
+  let date = new Date()
+  const gmt = date.getTime() + date.getTimezoneOffset() * 60000
+  date = new Date(gmt)
   let day = date.getDay()
   const hour = date.getHours()
   if (day === 0) day = 7
-  if (hour < 12) day--
+  if (hour < 4) day--
   if (day === 0) day = 7
   if (day === 7) return true
   if (mapElemental[day - 1].includes(item.value)) return true

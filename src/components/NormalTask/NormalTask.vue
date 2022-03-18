@@ -162,7 +162,7 @@ const submit = () => {
     if (valid) {
       store.dispatch('login/updateConfigAction', {
         id: store.state.login.userInfo.id,
-        config: toRaw(config.value)
+        config: config.value
       })
     } else {
       return false
