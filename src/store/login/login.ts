@@ -55,7 +55,8 @@ const login: Module<ILoginState, IRootState> = {
         tasks: JSON.parse(user.tasks) || [getDefaultTask()],
         schedules: JSON.parse(user.schedules) || getDefaultSchedule(),
         shopping: user.shopping || '',
-        hidden: user.hidden ? true : false
+        simulator: user.simulator ? true : false,
+        print: user.print ? true : false
       }
       commit('changeConfig', config, { root: true })
 

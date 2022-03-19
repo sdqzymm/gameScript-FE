@@ -15,7 +15,8 @@ const store = createStore<IRootState>({
         tasks: [getDefaultTask()],
         schedules: getDefaultSchedule(),
         shopping: '',
-        hidden: false
+        simulator: true,
+        print: true
       }
     }
   },
@@ -28,6 +29,8 @@ const store = createStore<IRootState>({
           return true
         })
       }
+      config.print = config.print ?? true
+      config.simulator = config.simulator ?? true
 
       state.config = config
       localCache.setCache('config', config)

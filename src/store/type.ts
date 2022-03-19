@@ -25,7 +25,8 @@ export interface Config {
   tasks: Task[]
   schedules: Task[]
   shopping?: string
-  hidden: boolean
+  simulator: boolean
+  print: boolean
 }
 
 export interface IRootState {

@@ -34,16 +34,28 @@
         优先于配置任务
         <div>{{ msg(task) }}</div>
       </el-form-item>
-      <el-form-item label="模拟器" class="task disable">
+      <el-form-item label="隐藏功能" class="task">
         <el-switch
-          v-model="config.hidden"
+          v-model="config.simulator"
           class="mb-2"
-          active-text="隐藏模拟器"
-          inactive-text="显示模拟器"
+          active-text="显示模拟器"
+          inactive-text="隐藏模拟器"
         />
-        <div v-if="config.hidden" class="text">
+        <el-switch
+          v-model="config.print"
+          class="mb-2 log"
+          active-text="显示日志"
+          inactive-text="隐藏日志"
+        />
+        <div v-if="!config.simulator" class="text1">
           模拟器会被隐藏, 切记退出脚本时使用ctrl+c, 不要直接右上角关闭,
-          否则脚本不会帮你恢复显示模拟器
+          否则脚本不会帮你恢复显示模拟器,
+          如果直接关闭了导致找不到模拟器可以重新启动脚本,
+          等个几秒然后ctrl+c退出即可
+        </div>
+        <div v-if="!config.print" class="text2">
+          打印信息会被隐藏, 脚本将不会输出跟游戏相关的信息,
+          用户将无法得知游戏进度
         </div>
       </el-form-item>
     </el-form>
@@ -69,9 +81,6 @@ const msg = computed(() => (task: Task) => {
 
 <style lang="scss" scoped>
 .schedule-task {
-  .disable {
-    display: none;
-  }
   .task {
     margin-bottom: 20px;
     padding: 20px;
@@ -84,8 +93,14 @@ const msg = computed(() => (task: Task) => {
       margin-left: 50px;
       margin-right: 5px;
     }
-    .text {
+    .text1 {
       color: red;
+    }
+    .text2 {
+      color: blue;
+    }
+    .log {
+      margin-left: 20px;
     }
   }
 }
