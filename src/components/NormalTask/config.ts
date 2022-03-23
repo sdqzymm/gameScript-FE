@@ -86,12 +86,12 @@ const chapters = [
 ]
 const checkPoints = [
   {
-    value: '13',
-    label: '炼狱一'
-  },
-  {
     value: '14',
     label: '炼狱二'
+  },
+  {
+    value: '13',
+    label: '炼狱一'
   },
   {
     value: '12',
