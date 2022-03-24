@@ -22,6 +22,7 @@ const login: Module<ILoginState, IRootState> = {
       localCache.setCache('token', token)
     },
     changeUserInfo(state, userInfo: UserInfo) {
+      userInfo.vip = userInfo.vip ?? false
       state.userInfo = userInfo
       localCache.setCache('userInfo', userInfo)
     }
@@ -46,7 +47,8 @@ const login: Module<ILoginState, IRootState> = {
       // 2. 用户信息
       const userInfo = {
         id: user.id,
-        name: user.name
+        name: user.name,
+        vip: user.vip ? true : false
       }
       commit('changeUserInfo', userInfo)
 

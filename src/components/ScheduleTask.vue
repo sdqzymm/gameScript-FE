@@ -58,14 +58,27 @@
           用户将无法得知游戏进度
         </div>
       </el-form-item>
+      <el-form-item
+        v-if="store.state.login.userInfo.vip"
+        label="薅羊毛"
+        class="task"
+      >
+        <div class="text1">
+          说明: 该功能为vip功能, 只会在装备本选择单次战斗时启用,
+          可以判断boss掉落的装备品级和星级, 不满足条件会点击撤退重新战斗,
+          具体条件可以在装备本任务中设置
+        </div>
+      </el-form-item>
     </el-form>
   </div>
 </template>
 
 <script setup lang="ts">
 import useConfig from '../hooks/useConfig'
+import { useStore } from '../store'
 import { Task } from '../store/type'
 
+const store = useStore()
 // 获取任务配置
 const config = useConfig()
 

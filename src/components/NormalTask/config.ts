@@ -142,7 +142,7 @@ const checkPoints = [
     label: '关卡1'
   }
 ]
-const _checkPoints = checkPoints.slice(3)
+const _checkPoints = checkPoints.slice(5)
 const options = [
   {
     value: '冒险',
