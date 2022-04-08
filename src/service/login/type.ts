@@ -9,6 +9,7 @@ export interface AccountLoginData {
   name: string
   tasks: string
   schedules: string
+  daily: string
   shopping: string
   simulator: boolean
   print: boolean

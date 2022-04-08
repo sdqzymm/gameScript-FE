@@ -1,12 +1,18 @@
 import { Module } from 'vuex'
 import router from '@/router'
-import { accountLoginRequest, updateUser, bindCode, register } from '@/service'
+import {
+  accountLoginRequest,
+  updateUser,
+  getCode,
+  bindCode,
+  register
+} from '@/service'
 import localCache from '@/utils/cache'
-import { ElMessage } from 'element-plus'
+import { ElMessage, ElMessageBox } from 'element-plus'
 import type { IRootState } from '../type'
 import type { ILoginState } from './type'
 import type { UserInfo } from '@/service'
-import { getDefaultSchedule, getDefaultTask } from '../config'
+import { getDefaultDaily, getDefaultSchedule, getDefaultTask } from '../config'
 
 const login: Module<ILoginState, IRootState> = {
   namespaced: true,
@@ -56,6 +62,7 @@ const login: Module<ILoginState, IRootState> = {
       const config = {
         tasks: JSON.parse(user.tasks) || [getDefaultTask()],
         schedules: JSON.parse(user.schedules) || getDefaultSchedule(),
+        daily: JSON.parse(user.daily) || getDefaultDaily(),
         shopping: user.shopping || '',
         simulator: user.simulator ? true : false,
         print: user.print ? true : false
@@ -127,13 +134,28 @@ const login: Module<ILoginState, IRootState> = {
       if (!res || res.code != 1000) {
         return
       }
-      ElMessage.success({
-        duration: 1000,
-        message: '注册成功, 正在自动登录'
-      })
-      setTimeout(() => {
-        this.dispatch('login/accountLoginAction', payload)
-      }, 1000)
+      const userId = res.data.insertId
+      const codeRes = await getCode()
+      if (codeRes && codeRes.code == 1000) {
+        const code = codeRes!.data.code
+        ElMessageBox.alert(code, '注册码(请复制保存, 然后点击确定)', {
+          confirmButtonText: '确定',
+          callback: async () => {
+            // 点击确定后绑定注册码, 并自动登录
+            const res = await bindCode(code, userId)
+            if (!res || res.code != 1000) {
+              return
+            }
+            ElMessage.success({
+              duration: 1000,
+              message: '注册成功, 正在自动登录'
+            })
+            setTimeout(() => {
+              this.dispatch('login/accountLoginAction', payload)
+            }, 1000)
+          }
+        })
+      }
     }
   }
 }

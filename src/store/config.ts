@@ -34,3 +34,16 @@ export function getDefaultSchedule() {
     }
   ]
 }
+
+export function getDefaultDaily() {
+  return {
+    open: true,
+    elemental: {
+      floor: 7
+    },
+    secretArea: {
+      property: '水',
+      floor: 12
+    }
+  }
+}

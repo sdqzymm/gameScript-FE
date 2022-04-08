@@ -6,7 +6,8 @@ enum LoginAPI {
   AccountLogin = '/login',
   AccountRegister = '/user',
   UserInfo = '/user/',
-  BindCode = 'code/bind'
+  BindCode = '/code/bind',
+  Code = '/code'
 }
 
 export function accountLoginRequest(account: Account) {
@@ -24,6 +25,13 @@ export function bindCode(code: string, id: number) {
   return hyfRequest.patch<APIData>(`${LoginAPI.BindCode}`, {
     code,
     id
+  })
+}
+
+export function getCode() {
+  return hyfRequest.post<APIData>(LoginAPI.Code, {
+    expire: 30,
+    count: 1
   })
 }
 

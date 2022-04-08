@@ -1,7 +1,7 @@
 import { createStore, Store, useStore as useVuexStore } from 'vuex'
 import { IRootState, IState, Config } from './type'
 import login from './login/login'
-import { getDefaultTask, getDefaultSchedule } from './config'
+import { getDefaultTask, getDefaultSchedule, getDefaultDaily } from './config'
 import localCache from '@/utils/cache'
 
 export function useStore(): Store<IState> {
@@ -14,6 +14,7 @@ const store = createStore<IRootState>({
       config: {
         tasks: [getDefaultTask()],
         schedules: getDefaultSchedule(),
+        daily: getDefaultDaily(),
         shopping: '',
         simulator: true,
         print: true
@@ -29,6 +30,9 @@ const store = createStore<IRootState>({
           return true
         })
       }
+
+      // 后来添加到config的属性, 由于用户缓存中可能不存在, 我们要给与默认值
+      config.daily = config.daily ?? getDefaultDaily()
       config.print = config.print ?? true
       config.simulator = config.simulator ?? true
 

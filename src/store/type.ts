@@ -24,6 +24,7 @@ export interface Task {
 export interface Config {
   tasks: Task[]
   schedules: Task[]
+  daily: Record<string, any>
   shopping?: string
   simulator: boolean
   print: boolean

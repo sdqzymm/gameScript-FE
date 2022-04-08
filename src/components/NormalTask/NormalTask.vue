@@ -21,12 +21,7 @@
           @change="handleChange($event, index)"
           placeholder="请选择任务类型"
         ></el-cascader>
-        <el-input-number
-          v-model="task.count"
-          placeholder="循环次数"
-          :min="1"
-          :max="task.type === '活动' ? 10 : 5"
-        />
+        <el-input-number v-model="task.count" placeholder="循环次数" :min="1" />
         <el-input-number
           v-if="task.continuous"
           v-model="task.continuous!.count"

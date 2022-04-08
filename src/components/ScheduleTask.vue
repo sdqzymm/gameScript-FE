@@ -58,6 +58,62 @@
           用户将无法得知游戏进度
         </div>
       </el-form-item>
+      <el-form-item label="自动每日" class="task">
+        <el-switch
+          v-model="config.daily.open"
+          class="mb-2"
+          active-text="开启每日"
+          inactive-text="关闭每日"
+        />
+        <div class="elemental">
+          <span class="text">元素禁地</span>
+          <el-select
+            v-model="config.daily.elemental.floor"
+            class="m-2"
+            placeholder="Select"
+            size="large"
+          >
+            <el-option
+              v-for="item in [1, 2, 3, 4, 5, 6, 7, 8, 9]"
+              :key="item"
+              :label="item + '层'"
+              :value="item"
+            />
+          </el-select>
+        </div>
+        <div class="secret">
+          <span class="text">秘境支配者</span>
+          <el-select
+            v-model="config.daily.secretArea.property"
+            class="m-2"
+            size="large"
+          >
+            <el-option
+              v-for="item of ['风', '火', '水', '光', '暗']"
+              :key="item"
+              :label="item + '装备本'"
+              :value="item"
+            />
+          </el-select>
+          <el-select
+            v-model="config.daily.secretArea.floor"
+            class="m-2"
+            size="large"
+          >
+            <el-option
+              v-for="item in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]"
+              :key="item"
+              :label="item + '层'"
+              :value="item"
+            />
+          </el-select>
+        </div>
+        <div class="text1">
+          开启每日后, 脚本会优先完成每日任务, 自动领取每日奖励,
+          并且每隔一天会重新执行每日任务, 如果无法升星导致每日无法完成,
+          会优先执行配置中的任务, 然后再尝试继续完成每日
+        </div>
+      </el-form-item>
       <el-form-item
         v-if="store.state.login.userInfo.vip"
         label="薅羊毛"
@@ -105,6 +161,18 @@ const msg = computed(() => (task: Task) => {
     .switch {
       margin-left: 50px;
       margin-right: 5px;
+    }
+    .elemental {
+      margin: 0 20px;
+      .text {
+        margin-right: 10px;
+      }
+    }
+    .secret {
+      margin: 5px 0;
+      .text {
+        margin-right: 10px;
+      }
     }
     .text1 {
       color: red;
