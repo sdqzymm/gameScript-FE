@@ -169,6 +169,7 @@ const show = computed(() => {
 // 触发配置任务表单的提交(因为定时任务表单无需校验)
 const taskRef = ref()
 const submit = () => {
+  activeNames.value = ['4']
   if (!taskRef.value) return
   taskRef.value.submit()
 }
