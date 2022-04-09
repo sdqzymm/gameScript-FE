@@ -88,8 +88,12 @@ const handleChange = (strs: string[], index: number) => {
     floor = floor + '-' + strs[3]
   }
   const task = config.value.tasks[index]
-  if (type !== '元素禁地' && type !== '秘境支配者') {
-    task.continuous!.open = true
+  // 类型变化到元素/装备本, 并且不是只有floor变化, 就采用单次战斗
+  if (
+    (type == '元素禁地' || type == '秘境支配者') &&
+    (task.type !== type || task.property !== property)
+  ) {
+    task.continuous!.open = false
   }
   task.type = type
   task.property = property
@@ -155,6 +159,12 @@ const submit = () => {
   if (!formRef.value) return
   formRef.value.validate((valid) => {
     if (valid) {
+      // 对于非元素/装备本来说, 不提供单次战斗, 这里统一改为启用连续
+      config.value.tasks.forEach((task) => {
+        if (task.type !== '元素禁地' && task.type !== '秘境支配者') {
+          task.continuous!.open = true
+        }
+      })
       store.dispatch('login/updateConfigAction', {
         id: store.state.login.userInfo.id,
         config: config.value
