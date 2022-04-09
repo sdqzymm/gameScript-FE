@@ -6,7 +6,7 @@ const defaultContinuous: Continuous = {
   diamond: false,
   fail: true,
   find: true,
-  open: true // true:表示启动连续战斗, false:表示启用单次战斗
+  open: false // true:表示启动连续战斗, false:表示启用单次战斗
 }
 
 export function getDefaultTask(): Task {
