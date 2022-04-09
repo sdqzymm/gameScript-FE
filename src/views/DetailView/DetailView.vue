@@ -156,7 +156,6 @@ const config = useConfig()
 
 // 添加配置任务
 const addTask = () => {
-  console.log(config.value)
   config.value.tasks.push(getDefaultTask())
 }
 

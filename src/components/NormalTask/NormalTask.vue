@@ -88,8 +88,8 @@ const handleChange = (strs: string[], index: number) => {
     floor = floor + '-' + strs[3]
   }
   const task = config.value.tasks[index]
-  if (type !== '活动' && task.count && task.count > 5) {
-    task.count = 5
+  if (type !== '元素禁地' && type !== '秘境支配者') {
+    task.continuous!.open = true
   }
   task.type = type
   task.property = property
