@@ -138,14 +138,14 @@ const login: Module<ILoginState, IRootState> = {
       const codeRes = await getCode()
       if (codeRes && codeRes.code == 1000) {
         const code = codeRes!.data.code
+        const res = await bindCode(code, userId)
+        if (!res || res.code != 1000) {
+          return
+        }
         ElMessageBox.alert(code, '注册码(请复制保存, 然后点击确定)', {
           confirmButtonText: '确定',
           callback: async () => {
-            // 点击确定后绑定注册码, 并自动登录
-            const res = await bindCode(code, userId)
-            if (!res || res.code != 1000) {
-              return
-            }
+            // 点击确定后自动登录
             ElMessage.success({
               duration: 1000,
               message: '注册成功, 正在自动登录'
