@@ -12,7 +12,12 @@ import { ElMessage, ElMessageBox } from 'element-plus'
 import type { IRootState } from '../type'
 import type { ILoginState } from './type'
 import type { UserInfo } from '@/service'
-import { getDefaultDaily, getDefaultSchedule, getDefaultTask } from '../config'
+import {
+  getDefaultDaily,
+  getDefaultEndless,
+  getDefaultSchedule,
+  getDefaultTask
+} from '../config'
 
 const login: Module<ILoginState, IRootState> = {
   namespaced: true,
@@ -57,15 +62,17 @@ const login: Module<ILoginState, IRootState> = {
         vip: user.vip ? true : false
       }
       commit('changeUserInfo', userInfo)
-
       // 3. 保存config
       const config = {
-        tasks: JSON.parse(user.tasks) || [getDefaultTask()],
-        schedules: JSON.parse(user.schedules) || getDefaultSchedule(),
-        daily: JSON.parse(user.daily) || getDefaultDaily(),
+        tasks: user.tasks ? JSON.parse(user.tasks) : [getDefaultTask()],
+        schedules: user.schedules
+          ? JSON.parse(user.schedules)
+          : getDefaultSchedule(),
+        daily: user.daily ? JSON.parse(user.daily) : getDefaultDaily(),
         shopping: user.shopping || '',
         simulator: user.simulator ? true : false,
-        print: user.print ? true : false
+        print: user.print ? true : false,
+        endless: user.endless ? JSON.parse(user.endless) : getDefaultEndless()
       }
       commit('changeConfig', config, { root: true })
 

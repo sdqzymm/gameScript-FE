@@ -1,7 +1,12 @@
 import { createStore, Store, useStore as useVuexStore } from 'vuex'
 import { IRootState, IState, Config } from './type'
 import login from './login/login'
-import { getDefaultTask, getDefaultSchedule, getDefaultDaily } from './config'
+import {
+  getDefaultTask,
+  getDefaultSchedule,
+  getDefaultDaily,
+  getDefaultEndless
+} from './config'
 import localCache from '@/utils/cache'
 
 export function useStore(): Store<IState> {
@@ -17,7 +22,8 @@ const store = createStore<IRootState>({
         daily: getDefaultDaily(),
         shopping: '',
         simulator: true,
-        print: true
+        print: true,
+        endless: getDefaultEndless()
       }
     }
   },
@@ -35,6 +41,7 @@ const store = createStore<IRootState>({
       config.daily = config.daily ?? getDefaultDaily()
       config.print = config.print ?? true
       config.simulator = config.simulator ?? true
+      config.endless = config.endless ?? getDefaultEndless()
 
       state.config = config
       localCache.setCache('config', config)

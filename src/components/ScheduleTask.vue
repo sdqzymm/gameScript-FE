@@ -19,8 +19,8 @@
           style="width: 120px"
           v-model="task.interval"
           placeholder="间隔几小时"
-          :min="3"
-          :max="task.type === '竞技场' ? 10 : 5"
+          :min="2"
+          :max="task.type === '商店' ? 5 : 10"
         />
         小时
         <el-switch
@@ -115,6 +115,50 @@
           然后再尝试继续完成每日
         </div>
       </el-form-item>
+      <el-form-item label="自动无尽" class="task">
+        <el-switch
+          v-model="config.endless.open"
+          class="mb-2"
+          active-text="开启无尽"
+          inactive-text="关闭无尽"
+        />
+        <div v-if="config.endless.open">
+          <div>脚本不会帮你配队, 你需要自己在无尽中配置好阵容进行一场战斗</div>
+          <div class="text1">
+            神器选择的优先级列表, 从上到下优先级依次降低, 可以拖拽调整优先顺序,
+            调整完毕记得提交(如果你出的3个神器都不在该优先级列表中,
+            那么会随机选择)
+          </div>
+          <div class="text2">
+            右边的开关表示是否开启保持优先级: 开启时,
+            该神器始终保持设置的优先级; 关闭时,
+            该神器在第一次选择后将从优先级列表中移除(比如有些神器多次选择是无效的)
+          </div>
+          <draggable
+            v-model="config.endless.artifacts"
+            class="list-group"
+            tag="transition-group"
+            :component-data="{
+              tag: 'ul',
+              type: 'transition-group',
+              name: !drag ? 'flip-list' : null
+            }"
+            v-bind="dragOptions"
+            @start="drag = true"
+            @end="onEnd"
+            item-key="id"
+          >
+            <template #item="{ element }">
+              <li class="list-group-item">
+                <span :style="{ color: element.color }"
+                  >{{ element.name }}: {{ element.desc }}</span
+                >
+                <el-switch v-model="element.keep" class="mb-2" />
+              </li>
+            </template>
+          </draggable>
+        </div>
+      </el-form-item>
       <el-form-item
         v-if="store.state.login.userInfo.vip"
         label="薅羊毛"
@@ -134,6 +178,7 @@
 import useConfig from '../hooks/useConfig'
 import { useStore } from '../store'
 import { Task } from '../store/type'
+import draggable from 'vuedraggable'
 
 const store = useStore()
 // 获取任务配置
@@ -147,9 +192,48 @@ const msg = computed(() => (task: Task) => {
   }优先执行${type}任务, 每隔${interval}小时执行${type}任务`
   return msg
 })
+
+// 拖拽排序
+const drag = ref(false)
+const onEnd = () => {
+  drag.value = false
+  console.log(config.value.endless)
+}
+const dragOptions = computed(() => {
+  return {
+    animation: 200,
+    group: 'description',
+    disabled: false,
+    ghostClass: 'ghost'
+  }
+})
 </script>
 
 <style lang="scss" scoped>
+/* 拖拽排序 */
+.flip-list-move {
+  transition: transform 0.5s;
+}
+.no-move {
+  transition: transform 0s;
+}
+.ghost {
+  opacity: 0.5;
+  background: #c8ebfb;
+}
+.list-group {
+  min-height: 20px;
+}
+.list-group-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  cursor: move;
+}
+.list-group-item i {
+  cursor: pointer;
+}
 .schedule-task {
   .task {
     margin-bottom: 20px;
@@ -183,6 +267,7 @@ const msg = computed(() => (task: Task) => {
     }
     .log {
       margin-left: 20px;
+      background-color: light;
     }
   }
 }

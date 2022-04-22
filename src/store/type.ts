@@ -28,6 +28,7 @@ export interface Config {
   shopping?: string
   simulator: boolean
   print: boolean
+  endless: Record<string, any>
 }
 
 export interface IRootState {
