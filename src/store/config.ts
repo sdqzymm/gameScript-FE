@@ -36,7 +36,7 @@ export function getDefaultSchedule() {
       id: 'send',
       type: '派遣',
       before: false,
-      interval: 2
+      interval: 3
     }
   ]
 }

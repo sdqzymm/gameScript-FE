@@ -42,7 +42,15 @@ const store = createStore<IRootState>({
       config.print = config.print ?? true
       config.simulator = config.simulator ?? true
       config.endless = config.endless ?? getDefaultEndless()
-
+      const len = config.schedules.length
+      if (len < 3) {
+        config.schedules.push({
+          id: 'send',
+          type: '派遣',
+          before: false,
+          interval: 3
+        })
+      }
       state.config = config
       localCache.setCache('config', config)
     }
