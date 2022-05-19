@@ -74,7 +74,7 @@
             size="large"
           >
             <el-option
-              v-for="item in [1, 2, 3, 4, 5, 6, 7, 8, 9]"
+              v-for="item in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]"
               :key="item"
               :label="item + '层'"
               :value="item"
