@@ -19,6 +19,7 @@ export default ({ mode }) => {
   const path = require('path')
   const env = loadEnv(mode, process.cwd())
   const { VITE_APP_TITLE } = env
+
   return defineConfig({
     resolve: {
       alias: {
