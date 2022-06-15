@@ -30,12 +30,12 @@ const store = createStore<IRootState>({
   mutations: {
     changeConfig(state, config: Config) {
       // 去除活动(在这里和任务的config.ts中)
-      if (Array.isArray(config.tasks)) {
-        config.tasks = config.tasks.filter((task) => {
-          if (task.type == '活动') return false
-          return true
-        })
-      }
+      // if (Array.isArray(config.tasks)) {
+      //   config.tasks = config.tasks.filter((task) => {
+      //     if (task.type == '活动') return false
+      //     return true
+      //   })
+      // }
 
       // 后来添加到config的属性, 由于用户缓存中可能不存在, 我们要给与默认值
       config.daily = config.daily ?? getDefaultDaily()
